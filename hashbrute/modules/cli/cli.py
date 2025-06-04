@@ -37,10 +37,10 @@ class CommandLine():
         parser=argparse.ArgumentParser(add_help=False,usage=argparse.SUPPRESS,exit_on_error=False)
         try:
             parser.add_argument("--hash",type=str)
-            parser.add_argument("-f","--file")
             parser.add_argument("-w","--wordlist")
             parser.add_argument("-t","--threads",type=int)
-            parser.add_argument("-h","--help")
+            parser.add_argument("-d","--debug",action="store_true")
+            parser.add_argument("-h","--help",action="store_true")
 
             arguments=parser.parse_args()
 
@@ -57,26 +57,20 @@ class CommandLine():
             print(f"{self.bright}{self.red}\n [ ! ] {self.reset}{self.blue}Unexpected Argument Error:{e}")
     
     def get_help(self):
-            return f"""\n
-                {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}DESCRIPTION{self.reset}{self.white}]{self.reset}: {self.white}{self.bold}hash-brute{self.reset} {self.white}is used to crack hashes {self.reset}{self.bold}{self.green}pevinkumar10{self.reset}.\n
-                    {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}Usage{self.reset}{self.white}]{self.reset}:{sys.argv[0]} [ options ]\n
-                            {self.white}hash-brute {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}Flags{self.reset}{self.bold}{self.white}]\n
-                    [{self.reset}{self.bold}{self.blue}Flags{self.reset}{self.bold}{self.white}]
-                                
-                            [{self.reset}{self.bold}{self.blue}Input{self.reset}{self.bold}{self.white}]{self.reset}
+            return f"""
+        {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}DESCRIPTION{self.reset}{self.white}]{self.reset}: {self.white}{self.bold}hash-brute{self.reset} {self.white}is used to crack hashes {self.reset}{self.bold}{self.green}pevinkumar10{self.reset}.\n
+            {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}Usage{self.reset}{self.white}]{self.reset}:{sys.argv[0]} [ options ]\n
+                    {self.white}hash-brute {self.bold}{self.white}<{self.reset}{self.bold}{self.blue}Flags{self.reset}{self.bold}{self.white}>\n
+            [{self.reset}{self.bold}{self.blue}Flags{self.reset}{self.bold}{self.white}]
+                    [{self.reset}{self.bold}{self.blue}Input{self.reset}{self.bold}{self.white}]{self.reset}
+                              --hash                    :  Input hash to do bruteforce                                                  [Mandatory]
+                        -w,   --wordlist                :  List of passwords one per line (default wordlist/default-wordlist.txt)       [Mandatory]   
 
-                                      --hash                    :  Input hash to do bruteforce                                                  [Mandatory]
-                                -f,   --file                    :  List of hases to do bruteforce                                               
-                                -w,   --wordlist                :  List of passwords one per line (default wordlist/default-wordlist.txt)       [Mandatory]           
+                    [{self.reset}{self.bold}{self.blue}Options{self.reset}{self.bold}{self.white}]{self.reset}
+                        -t,   --threads                 :  Number of threads (default : 40)               
 
-                            [{self.reset}{self.bold}{self.blue}Options{self.reset}{self.bold}{self.white}]{self.reset}
-                            
-                                -t,   --threads                 :  Number of threads (default : 40)                
+                    {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}Debug{self.reset}{self.bold}{self.white}]{self.reset}
+                        -d,   --debug                   :  To set debug flag.
+                        -h,   --help                    :  To see all the available options.
 
-                            {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}Debug{self.reset}{self.bold}{self.white}]{self.reset}
-                                -d,   --debug                   :  To set debug flag.
-                                -h,   --help                    :  To see all the available options.
-
-                            {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}Note{self.reset}{self.bold}{self.white}]{self.reset} 
-                                => Use --hash or --file at a time.
                         """
