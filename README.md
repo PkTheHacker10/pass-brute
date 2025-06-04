@@ -1,4 +1,4 @@
-# 🔐 hash-brute
+# 🔐 HashBrute
 
 **hash-brute** is a command-line, multi-threaded tool designed to crack cryptographic hashes by spraying password lists. It supports various hashing algorithms and leverages concurrent processing to expedite the cracking process.
 
@@ -11,7 +11,37 @@
 * Multi-threaded execution for faster performance.
 * Customizable wordlists for password spraying.
 * Progress tracking with `tqdm` integration.
-* Modular and extensible Python codebase.([github.com][1])
+* Modular and extensible Python codebase.
+
+---
+
+## Tool Structure:
+
+```
+.
+├── LICENSE                   # LICENSE.
+├── README.md                 # Readme file.
+├── UPDATELOG.md              # Update log file.
+├── hashbrute                 # Hash Brute main directory.
+│   ├── __init__.py
+│   ├── hashbrute.py             # HashBrute handler.
+│   ├── modules                     # Modules for HashBrute.
+│   │   ├── __init__.py
+│   │   ├── cli                        # Cli modules.
+│   │   │   ├── __init__.py
+│   │   │   └── cli.py                    # Cli handler file.
+│   │   ├── core.py                    # Core file for HashBrute.
+│   │   ├── cracker                    # Hash Cracker module.
+│   │   │   ├── __init__.py    
+│   │   │   └── cracker.py                # Hash cracker handler.
+│   │   └── utility                    # Utility file for support funtions.
+│   │       ├── __init__.py
+│   │       └── utils.py                  # Utilities for support functions.
+│   └── wordlist                 # Default wordlist directory.
+│       └── default-wordlist.txt
+├── requirements.txt          # requirements for HashBrute.
+└── setup.py                  # Setup file for HashBrute.
+```
 
 ---
 

@@ -9,8 +9,16 @@ except ImportError as Ie:
     print(f"[ + ] Couldn't import '{Ie}'")
 
 class CrackerCore:
-    def __init__(self):
+    """
+        Class to handle the hash cracker.
 
+        Args:
+            None
+
+        Returns:
+            None
+    """
+    def __init__(self):
         self.blue = Fore.BLUE
         self.red=Fore.RED
         self.blue=Fore.BLUE
@@ -27,33 +35,42 @@ class CrackerCore:
 
         self.wordlist = "hashbrute/wordlist/default-wordlist.txt"
 
-        self.utility = Utils()
-        self.commandline = CommandLine()
+    def handler(self) -> None:
+        # Intializing the classes.
+        commandline = CommandLine()
+        utilis = Utils()
 
-    def handler(self):
-        print(self.commandline.get_banner())
-        arguments = self.commandline.get_arguments()
-        
+        # printing banner.
+        print(commandline.get_banner())
+
+        # Parsing arguments 
+        arguments = commandline.get_arguments()
+
+        # Checking for the help flag.
         if arguments.help:
-            print(self.commandline.get_help())
+            print(commandline.get_help())
             exit()
 
+        # Checking for the debug flag.
         if arguments.debug:
             print("[ ✓ ] Debug mode activated")
             self.debug = True
 
+        # Checking for the threads flag to adjust default thread count.
         if arguments.threads:
             self.default_threads = arguments.threads
             if arguments.debug:
                 print(f"[ ✓ ] Threads increased to {self.default_threads}")
 
+        # Checking for the wordlist flag to adjust default wordlist.
         if arguments.wordlist:
             if arguments.debug:
                 print(f"[ ✓ ] Wordlist changed to '{arguments.wordlist}'")
 
+        # Actual logics starts here.
         if arguments.hash:
             input_hash = arguments.hash
-            passwords = self.utility.get_file_contents(arguments.wordlist) if arguments.wordlist else self.utility.get_file_contents(self.wordlist)
+            passwords = utilis.get_file_contents(arguments.wordlist) if arguments.wordlist else utilis.get_file_contents(self.wordlist)
 
             print(f"[ + ] Total passwords in wordlist: {len(passwords)}")
 

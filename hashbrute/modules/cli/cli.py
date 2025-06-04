@@ -6,8 +6,17 @@ try:
 except ImportError as Ie:
     print(f"[ + ] Couldn't import '{Ie}'")
 
-class CommandLine():
-    def __init__(self):
+class CommandLine:
+    """
+        Class to handle commandline.
+
+        Args:
+            None
+        
+        Results:
+            None
+    """
+    def __init__(self) -> None:
         self.blue = Fore.BLUE
         self.red=Fore.RED
         self.blue=Fore.BLUE
@@ -19,7 +28,17 @@ class CommandLine():
         self.bold=Style.BRIGHT
         self.reset=Style.RESET_ALL
 
-    def get_banner(self):
+    def get_banner(self) ->str:
+        """
+            Function that return banner for the HashBrute.
+
+            Args:
+                None
+            
+            Returns:
+                Banner (str) : Banner for the HashBrute.
+                
+        """
         banner = """
          _______ _________         __         ______              __         
         |   |   |   ___   |.-----.|  |--.    |   __ \\.----.--.--.|  |_.-----.
@@ -33,7 +52,17 @@ class CommandLine():
 
         return banner
 
-    def get_arguments(self):
+    def get_arguments(self) -> list:
+        """
+            Function to parse arguments
+
+            Args:
+                None
+            
+            Returns:
+                Arguments for the HashBrute.
+
+        """
         parser=argparse.ArgumentParser(add_help=False,usage=argparse.SUPPRESS,exit_on_error=False)
         try:
             parser.add_argument("--hash",type=str)
@@ -52,12 +81,24 @@ class CommandLine():
             
         except argparse.ArgumentTypeError:
             print(f"{self.bright}{self.blue}\n [ ! ] {self.reset}{self.blue}Please use -h to get more information.")
+            exit()
         
         except Exception as e:
             print(f"{self.bright}{self.red}\n [ ! ] {self.reset}{self.blue}Unexpected Argument Error:{e}")
+            exit()
     
-    def get_help(self):
-            return f"""
+    def get_help(self) ->str:
+        """
+            Function that return Help menu for the HashBrute.
+
+            Args:
+                None
+            
+            Returns:
+                Help menu (str) : Help menu for the HashBrute.
+                
+        """
+        return f"""
         {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}DESCRIPTION{self.reset}{self.white}]{self.reset}: {self.white}{self.bold}hash-brute{self.reset} {self.white}is used to crack hashes {self.reset}{self.bold}{self.green}pevinkumar10{self.reset}.\n
             {self.bold}{self.white}[{self.reset}{self.bold}{self.blue}Usage{self.reset}{self.white}]{self.reset}:{sys.argv[0]} [ options ]\n
                     {self.white}hash-brute {self.bold}{self.white}<{self.reset}{self.bold}{self.blue}Flags{self.reset}{self.bold}{self.white}>\n

@@ -9,11 +9,29 @@ except ImportError as Ie:
     print(f"[ ! ] Couldn't import '{Ie}'")
 
 class HashCracker:
+    """
+        Class to handle the hash cracking.
+
+        Args:
+            thread_count    (int): Number of threads to spawn.
+            debug           (bool): To set debug flag.
+        Returns:
+            password        (str): returns password if found , else returns None.
+    """
     def __init__(self,thread_count = 40, debug = False):
         self.debug = debug
         self.threads = thread_count
 
-    def identify_hash_type(self, input_hash):
+    def identify_hash_type(self, input_hash:str) -> str:
+        """
+            Function to indentify the the hash type.
+
+            Args:
+                input_hash  (str): hash value to check.
+
+            Returns:
+                hash_type   (str): returns the hash type.
+        """
         hid = HashID()
         hash_length = len(input_hash)
         matches = list(hid.identifyHash(input_hash))
@@ -45,11 +63,20 @@ class HashCracker:
         else:
             if self.debug:
                 print(f"[ ! ] Hash can't identified")
-            for match in matches:
-                print(match.name)
             return None
 
-    def crack_hash(self,input_hash,hash_type,password):
+    def crack_hash(self,input_hash:str,hash_type:str,password:str) ->str:
+        """
+            Function to crack the the hash.
+
+            Args:
+                input_hash  (str): Hash value to crack.
+                hash_type   (str): Type of the hash to crack.
+                password    (str): password to check with hash.
+
+            Returns:
+                password   (str): returns the password if found ,else return None.
+        """
         if hash_type.lower() == "md5":
 
             hashed = md5(password.encode()).hexdigest()
@@ -90,7 +117,18 @@ class HashCracker:
         else:
             print("[ ! ] Unsupported hash type.")
 
-    def hash_cracker(self, hash_type, input_hash, passwords):
+    def hash_cracker(self, hash_type:str, input_hash:str, passwords:list) -> str:
+        """
+            Function to crack the the hash.
+
+            Args:
+                input_hash  (str): Hash value to crack.
+                hash_type   (str): Type of the hash to crack.
+                passwords   (list): list of passwords to brutforce.
+
+            Returns:
+                result   (str): returns the password if found ,else return None.
+        """
         try:
             with ThreadPoolExecutor(max_workers=self.threads) as executor:
                 tasks = {
@@ -107,7 +145,17 @@ class HashCracker:
             print(f"[ ! ] Unexpected Error : {Ue}")
 
 
-    def main(self ,input_hash:str,passwords:list):
+    def main(self ,input_hash:str,passwords:list) ->str:
+        """
+            Main function for the HashCracker.
+
+            Args:
+                input_hash  (str):  hash value to check.
+                passwords   (list): list of passwords to brutforce.
+
+            Returns:
+                password   (str): returns the password for the cracked hash.
+        """
         if self.debug:
             print(f"[ > ] Checking hash: {input_hash}")
             print("[ ↺ ] identifying hash type...")
