@@ -58,7 +58,7 @@
 
 2. **Installation**
 - It needed hashid ,tqdm as dependency . You can install it from pypi or by this following command.
-   - Ensure you are in the tool directory that hash setup.py
+   - Note: Ensure you are in the tool directory that has hashbrute setup.py.
       ```bash
       pipx install .
 
