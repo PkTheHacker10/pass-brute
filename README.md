@@ -57,22 +57,19 @@
 
 
 2. **Installation**
-   ```bash
-   pip3 install -r requirements.txt
+- It needed hashid ,tqdm as dependency . You can install it from pypi or by this following command.
+   - Ensure you are in the tool directory that hash setup.py
+      ```bash
+      pipx install .
 
-   ```
-    or ,if you want to install it as a tool.
-   ```
-    sudo python3 setup.py install
-
-   ```
+      ```
 
 ---
 
 ## 🛠️ Usage
 
 ```bash
-python hashbrute.py --hash <hash_value> [--wordlist <path_to_wordlist>] [--threads <number_of_threads>] [--debug]
+hashbrute --hash <hash_value> [--wordlist <path_to_wordlist>] [--threads <number_of_threads>] [--debug]
 ```
 
 
@@ -86,7 +83,7 @@ python hashbrute.py --hash <hash_value> [--wordlist <path_to_wordlist>] [--threa
 ### **Example:**
 
 ```bash
-python hashbrute.py --hash 5d41402abc4b2a76b9719d911017c592 --wordlist rockyou.txt --threads 50 --debug
+hashbrute --hash 5d41402abc4b2a76b9719d911017c592 --wordlist rockyou.txt --threads 50 --debug
 ```
 
 ---

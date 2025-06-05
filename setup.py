@@ -10,7 +10,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         'hashid',
-        'tqdm'
+        'tqdm',
+        'colorama'
     ],
     entry_points={
         'console_scripts': [
